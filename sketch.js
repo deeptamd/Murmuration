@@ -27,11 +27,11 @@ function setup() {
   createCanvas(600, 600);
   createP("Click anywhere to make the flock disperse like birds avoiding a predator.");
   loadWeatherData(); // Fetch initial weather data
-  setInterval(loadWeatherData, 10000); // Update every 10 seconds
+  setInterval(loadWeatherData, 10000); // Update every 30 seconds
 
   flock = new Flock();
 
-  // Add an initial set of boids into the system
+  // Add an initial set of boids into the system (morning = 500 boids)
   for (let i = 0; i < 2000; i++) {
     let b = new Boid(width / 2 + random(-50, 50), height / 2 + random(-50, 50));
     flock.addBoid(b);
@@ -261,26 +261,11 @@ class Boid {
   }
 
   borders() {
-    let margin = 220; // Boundary margin
-    let boundaryForce = this.maxforce * 5; // Stronger force near edges
-
-    // Apply forces near edges
-    if (this.position.x < margin) {
-      let distance = map(this.position.x, 0, margin, 1, 0);
-      this.applyForce(createVector(boundaryForce * distance, 0));
-    }
-    if (this.position.x > width - margin) {
-      let distance = map(this.position.x, width, width - margin, 0, 1);
-      this.applyForce(createVector(-boundaryForce * distance, 0));
-    }
-    if (this.position.y < margin) {
-      let distance = map(this.position.y, 0, margin, 1, 0);
-      this.applyForce(createVector(0, boundaryForce * distance));
-    }
-    if (this.position.y > height - margin) {
-      let distance = map(this.position.y, height, height - margin, 0, 1);
-      this.applyForce(createVector(0, -boundaryForce * distance));
-    }
+    let margin = 220;
+    if (this.position.x < margin) this.applyForce(createVector(this.maxforce, 0));
+    if (this.position.y < margin) this.applyForce(createVector(0, this.maxforce));
+    if (this.position.x > width - margin) this.applyForce(createVector(-this.maxforce, 0));
+    if (this.position.y > height - margin) this.applyForce(createVector(0, -this.maxforce));
   }
 
   separate(boids) {
