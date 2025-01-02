@@ -3,13 +3,43 @@
   <head>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/p5.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/addons/p5.sound.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <meta charset="utf-8" />
-
   </head>
   <body>
     <main>
+      <!-- Canvas for p5.js -->
+      <canvas
+        id="defaultCanvas0"
+        class="p5Canvas"
+        width="1200"
+        height="600"
+        style="width: 1200px; height: 600px;"
+      ></canvas>
     </main>
+
+    <!-- Sliders Container -->
+    <div class="slider-container">
+      <!-- Daylight Slider -->
+      <div class="slider">
+        <input type="range" id="daylight" min="0" max="1" step="0.01" />
+        <p>Daylight (0 = Full Daylight, 1 = Night)</p>
+      </div>
+
+      <!-- Sky Condition Slider -->
+      <div class="slider">
+        <input type="range" id="sky-condition" min="0" max="1" step="0.01" />
+        <p>Sky Condition (0 = Rainy, 1 = Clear Skies)</p>
+      </div>
+
+      <!-- Humidity Slider -->
+      <div class="slider">
+        <input type="range" id="humidity" min="0" max="100" step="1" />
+        <p>Humidity (0 = Dry, 100 = Very Humid)</p>
+      </div>
+    </div>
+
+    <!-- Script for p5.js -->
     <script src="sketch.js"></script>
   </body>
 </html>
