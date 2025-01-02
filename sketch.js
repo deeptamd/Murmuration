@@ -24,7 +24,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(900, 600);
   createP("Click anywhere to make the flock disperse like birds avoiding a predator.");
   loadWeatherData(); // Fetch initial weather data
   setInterval(loadWeatherData, 10000); // Update every 30 seconds
@@ -32,7 +32,7 @@ function setup() {
   flock = new Flock();
 
   // Add an initial set of boids into the system (morning = 500 boids)
-  for (let i = 0; i < 3000; i++) {
+  for (let i = 0; i < 1500; i++) {
     let b = new Boid(width / 2 + random(-50, 50), height / 2 + random(-50, 50));
     flock.addBoid(b);
   }
@@ -103,7 +103,7 @@ function mouseReleased() {
 }
 
 function adjustBoidCount(daylightValue, skyConditionValue) {
-  let targetBoidCount = map(daylightValue, 0, 1, 1000, 3000); // Fewer boids at night, more during day
+  let targetBoidCount = map(daylightValue, 0, 1, 700, 1500); // Fewer boids at night, more during day
   while (flock.boids.length > targetBoidCount) flock.boids.pop(); // Remove excess
   while (flock.boids.length < targetBoidCount) {
     let b = new Boid(width / 2 + random(-100, 100), height / 2 + random(-100, 100));
@@ -261,7 +261,7 @@ class Boid {
   }
 
   borders() {
-    let margin = 3000;
+    let margin = 250;
     if (this.position.x < margin) this.applyForce(createVector(this.maxforce, 0));
     if (this.position.y < margin) this.applyForce(createVector(0, this.maxforce));
     if (this.position.x > width - margin) this.applyForce(createVector(-this.maxforce, 0));
