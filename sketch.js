@@ -24,7 +24,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowWidth);
+  createCanvas(1600, 900);
   createP("Click anywhere to make the flock disperse like birds avoiding a predator.");
   loadWeatherData(); // Fetch initial weather data
   setInterval(loadWeatherData, 10000); // Update every 30 seconds
