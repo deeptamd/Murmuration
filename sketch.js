@@ -102,7 +102,7 @@ function mouseReleased() {
 }
 
 function adjustBoidCount(daylightValue, skyConditionValue) {
-  let targetBoidCount = map(daylightValue, 0, 1, 400, 1200); // Fewer boids at night, more during day
+  let targetBoidCount = map(daylightValue, 0, 1, 600, 1700); // Fewer boids at night, more during day
   while (flock.boids.length > targetBoidCount) flock.boids.pop(); // Remove excess
   while (flock.boids.length < targetBoidCount) {
     let b = new Boid(width / 2 + random(-100, 100), height / 2 + random(-100, 100));
