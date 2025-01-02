@@ -192,7 +192,7 @@ class Boid {
     this.maxspeed = 3;
     this.maxforce = 0.3;
     this.separationFactor = 20.0;
-    this.cohesionFactor = 30.0;
+    this.cohesionFactor = 20.0;
   }
 
   run(boids) {
