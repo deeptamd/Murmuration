@@ -113,7 +113,7 @@ function adjustBoidCount(daylightValue, skyConditionValue) {
 function adjustSoundVolumeAndPitch() {
   let avgSpeed = flock.getAverageSpeed();
   murmurationSound.rate(map(avgSpeed, 2, 7, 0.8, 1.5)); // Adjust pitch based on average speed
-  let density = flock.boids.length / 1200; // Normalize density between 0 and 1
+  let density = flock.boids.length / 1200; // Normze density between 0 and 1
   murmurationSound.setVolume(density);
 }
 
@@ -229,7 +229,7 @@ class Boid {
 
   flock(boids) {
     let sep = this.separate(boids).mult(this.separationFactor || 2.0);
-    let ali = this.align(boids).mult(1.5);
+    let ali = this.align(boids).mult(3);
     let coh = this.cohesion(boids).mult(this.cohesionFactor || 1.5);
 
     this.applyForce(sep);
