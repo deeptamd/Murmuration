@@ -230,7 +230,7 @@ class Boid {
   flock(boids) {
     let sep = this.separate(boids).mult(this.separationFactor || 2.0);
     let ali = this.align(boids).mult(3);
-    let coh = this.cohesion(boids).mult(this.cohesionFactor || 1.5);
+    let coh = this.cohesion(boids).mult(this.cohesionFactor || 1);
 
     this.applyForce(sep);
     this.applyForce(ali);
