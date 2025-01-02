@@ -2,17 +2,18 @@
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%; /* Ensure body takes full height */
+  height: 100%; /* Ensure the body takes the full height */
   display: flex;
-  flex-direction: column; /* Arrange elements in a column */
-  justify-content: center; /* Vertically center the content */
-  align-items: center; /* Horizontally center the content */
+  flex-direction: column; /* Arrange elements vertically */
+  justify-content: flex-start; /* Start from the top */
+  align-items: center; /* Center horizontally */
+  overflow: hidden; /* Prevent scrolling */
 }
 
-/* Center the canvas on the page */
+/* Canvas styling */
 canvas {
   display: block;
-  margin-bottom: 20px; /* Add space below the canvas */
+  margin-top: 20px; /* Add spacing between the top and the canvas */
 }
 
 /* Container for sliders */
@@ -22,8 +23,12 @@ canvas {
   align-items: center;
   width: 100%; /* Full width of the page */
   max-width: 800px; /* Limit the width for better aesthetics */
-  padding: 0 20px; /* Add padding on the sides */
-  box-sizing: border-box; /* Ensure padding is included in the total width */
+  padding: 10px 20px; /* Add padding for spacing */
+  box-sizing: border-box; /* Include padding in the total width */
+  position: absolute; /* Position over the canvas */
+  bottom: 20px; /* Place it near the bottom */
+  background: rgba(255, 255, 255, 0.8); /* Transparent background to avoid obscuring the canvas */
+  z-index: 10; /* Ensure it is above the canvas */
 }
 
 /* Individual sliders */
@@ -39,7 +44,7 @@ input[type="range"] {
   -webkit-appearance: none; /* Remove default styling */
   appearance: none;
   width: 100%; /* Full width of its container */
-  height: 0.1px; /* Thinner slider track height */
+  height: 2px; /* Thinner slider track height */
   background: black; /* Slider track color */
   border-radius: 5px; /* Rounded track edges */
   outline: none; /* Remove focus outline */
