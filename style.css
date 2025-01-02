@@ -1,46 +1,90 @@
-/* Ensure the body and html take up the full height */
-html,
-body {
+/* General page styling */
+html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
-  overflow: hidden;
+  height: 100%; /* Ensure the body takes the full height */
+  display: flex;
+  flex-direction: column; /* Arrange elements vertically */
+  justify-content: flex-start; /* Start from the top */
+  align-items: center; /* Center horizontally */
+  overflow: hidden; /* Prevent scrolling */
 }
 
 /* Canvas styling */
-main {
-  position: relative;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+canvas {
+  display: block;
+  margin-top: 20px; /* Add spacing between the top and the canvas */
 }
 
-/* Slider Container Styling */
+/* Container for sliders */
 .slider-container {
-  position: absolute;
-  bottom: 20px;
-  width: 100%;
   display: flex;
-  justify-content: space-around; /* Space the sliders evenly */
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 10px 0;
-}
-
-/* Individual Slider Styles */
-.slider {
-  display: flex;
-  flex-direction: column;
+  justify-content: space-between; /* Space sliders across the container */
   align-items: center;
+  width: 100%; /* Full width of the page */
+  max-width: 800px; /* Limit the width for better aesthetics */
+  padding: 10px 20px; /* Add padding for spacing */
+  box-sizing: border-box; /* Include padding in the total width */
+  position: absolute; /* Position over the canvas */
+  bottom: 20px; /* Place it near the bottom */
+  background: rgba(255, 255, 255, 0.8); /* Transparent background to avoid obscuring the canvas */
+  z-index: 10; /* Ensure it is above the canvas */
 }
 
+/* Individual sliders */
+.slider-container .slider {
+  display: flex;
+  flex-direction: column; /* Arrange slider and label vertically */
+  align-items: center; /* Center the slider and its label */
+  width: 33%; /* Each slider takes one-third of the container */
+}
+
+/* Styling for sliders */
 input[type="range"] {
-  width: 200px; /* Adjust slider width */
-  height: 5px; /* Make the slider thinner */
+  -webkit-appearance: none; /* Remove default styling */
+  appearance: none;
+  width: 100%; /* Full width of its container */
+  height: 2px; /* Thinner slider track height */
+  background: black; /* Slider track color */
+  border-radius: 5px; /* Rounded track edges */
+  outline: none; /* Remove focus outline */
 }
 
-p {
-  font-size: 14px; /* Adjust label text size */
-  margin-top: 5px; /* Space between slider and label */
+/* Slider thumb styling for WebKit browsers (Chrome, Safari, etc.) */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Remove default styling */
+  appearance: none;
+  width: 15px; /* Thumb width */
+  height: 15px; /* Thumb height */
+  background: black; /* Thumb color */
+  border-radius: 50%; /* Circular thumb */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+/* Slider thumb styling for Firefox */
+input[type="range"]::-moz-range-thumb {
+  width: 15px; /* Thumb width */
+  height: 15px; /* Thumb height */
+  background: black; /* Thumb color */
+  border: none; /* Remove border */
+  border-radius: 50%; /* Circular thumb */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+/* Slider thumb styling for Edge and Internet Explorer */
+input[type="range"]::-ms-thumb {
+  width: 15px; /* Thumb width */
+  height: 15px; /* Thumb height */
+  background: black; /* Thumb color */
+  border: none; /* Remove border */
+  border-radius: 50%; /* Circular thumb */
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+/* Optional: Styling for labels */
+.slider-container p {
+  margin-top: 5px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
   text-align: center;
 }
