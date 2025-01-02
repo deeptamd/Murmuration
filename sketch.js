@@ -39,17 +39,17 @@ function setup() {
   // Daylight slider: 0 (night) to 1 (full daylight)
   daylightSlider = createSlider(0, 1, 0.5, 0.01);
   daylightSlider.position(10, height + 10);
-  createP("Daylight (Sunrise, Sunset)").position(10, height + 30);
+  createP("Daylight (0 = Sunrise, 1 = Sunset)").position(10, height + 30);
 
   // Sky condition slider: 0 (rainy) to 1 (clear skies)
   skyConditionSlider = createSlider(0, 1, 0.5, 0.01);
   skyConditionSlider.position(10, height + 70);
-  createP("Sky Condition (0 = Rainy, 1 = Clear Skies)").position(10, height + 90);
+  createP("Sky Condition (0 = Rainy Weather, 1 = Clear Weather)").position(10, height + 90);
 
   // Humidity slider: 0 (dry) to 100 (very humid)
   humiditySlider = createSlider(0, 100, 50, 1);
   humiditySlider.position(10, height + 130);
-  createP("Humidity (0 = Dry, 100 = Very Humid)").position(10, height + 150);
+  createP("Humidity (0 = Humid, 100 = Dry)").position(10, height + 150);
 
   murmurationSound.loop(); // Start the murmuration sound
 }
