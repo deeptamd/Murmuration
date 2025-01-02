@@ -2,48 +2,22 @@
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%; /* Ensure the body takes the full height */
+  height: 100%; /* Ensure body takes full height */
   display: flex;
-  flex-direction: column; /* Arrange elements vertically */
-  justify-content: flex-start; /* Start from the top */
-  align-items: center; /* Center horizontally */
-  overflow: hidden; /* Prevent scrolling */
+  justify-content: center; /* Horizontally center the content */
+  align-items: center; /* Vertically center the content */
 }
 
-/* Canvas styling */
+/* Center the canvas on the page */
 canvas {
   display: block;
-  margin-top: 20px; /* Add spacing between the top and the canvas */
-}
-
-/* Container for sliders */
-.slider-container {
-  display: flex;
-  justify-content: space-between; /* Space sliders across the container */
-  align-items: center;
-  width: 100%; /* Full width of the page */
-  max-width: 800px; /* Limit the width for better aesthetics */
-  padding: 10px 20px; /* Add padding for spacing */
-  box-sizing: border-box; /* Include padding in the total width */
-  position: absolute; /* Position over the canvas */
-  bottom: 20px; /* Place it near the bottom */
-  background: rgba(255, 255, 255, 0.8); /* Transparent background to avoid obscuring the canvas */
-  z-index: 10; /* Ensure it is above the canvas */
-}
-
-/* Individual sliders */
-.slider-container .slider {
-  display: flex;
-  flex-direction: column; /* Arrange slider and label vertically */
-  align-items: center; /* Center the slider and its label */
-  width: 33%; /* Each slider takes one-third of the container */
 }
 
 /* Styling for sliders */
 input[type="range"] {
   -webkit-appearance: none; /* Remove default styling */
   appearance: none;
-  width: 100%; /* Full width of its container */
+  width: 200px; /* Slider width */
   height: 2px; /* Thinner slider track height */
   background: black; /* Slider track color */
   border-radius: 5px; /* Rounded track edges */
@@ -81,10 +55,10 @@ input[type="range"]::-ms-thumb {
   cursor: pointer; /* Change cursor to pointer */
 }
 
-/* Optional: Styling for labels */
-.slider-container p {
+/* Optional: Add some spacing between sliders and labels */
+p {
   margin-top: 5px;
+  margin-bottom: 15px;
   font-family: Arial, sans-serif;
   font-size: 14px;
-  text-align: center;
 }
