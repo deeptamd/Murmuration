@@ -39,7 +39,7 @@ function setup() {
   // Daylight slider: 0 (night) to 1 (full daylight)
   daylightSlider = createSlider(0, 1, 0.5, 0.01);
   daylightSlider.position(10, height + 10);
-  createP("Daylight (0 = Full Daylight, 1 = Night)").position(10, height + 30);
+  createP("Daylight (Sunrise, Sunset)").position(10, height + 30);
 
   // Sky condition slider: 0 (rainy) to 1 (clear skies)
   skyConditionSlider = createSlider(0, 1, 0.5, 0.01);
