@@ -18,7 +18,7 @@ input[type="range"] {
   -webkit-appearance: none; /* Remove default styling */
   appearance: none;
   width: 200px; /* Slider width */
-  height: 5px; /* Slider track height */
+  height: 2px; /* Thinner slider track height */
   background: black; /* Slider track color */
   border-radius: 5px; /* Rounded track edges */
   outline: none; /* Remove focus outline */
