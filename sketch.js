@@ -24,7 +24,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(900, 600);
+  createCanvas(1200, 600);
   loadWeatherData(); // Fetch initial weather data
   setInterval(loadWeatherData, 10000); // Update every 30 seconds
 
@@ -188,7 +188,7 @@ class Boid {
     this.acceleration = createVector(0, 0);
     this.velocity = createVector(random(-1, 1), random(-1, 1));
     this.position = createVector(x, y);
-    this.r = 1;
+    this.r = 1.5;
     this.maxspeed = 3;
     this.maxforce = 0.3;
     this.separationFactor = 20.0;
