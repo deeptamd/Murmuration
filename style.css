@@ -4,20 +4,41 @@ html, body {
   padding: 0;
   height: 100%; /* Ensure body takes full height */
   display: flex;
-  justify-content: center; /* Horizontally center the content */
-  align-items: center; /* Vertically center the content */
+  flex-direction: column; /* Arrange elements in a column */
+  justify-content: center; /* Vertically center the content */
+  align-items: center; /* Horizontally center the content */
 }
 
 /* Center the canvas on the page */
 canvas {
   display: block;
+  margin-bottom: 20px; /* Add space below the canvas */
+}
+
+/* Container for sliders */
+.slider-container {
+  display: flex;
+  justify-content: space-between; /* Space sliders across the container */
+  align-items: center;
+  width: 100%; /* Full width of the page */
+  max-width: 800px; /* Limit the width for better aesthetics */
+  padding: 0 20px; /* Add padding on the sides */
+  box-sizing: border-box; /* Ensure padding is included in the total width */
+}
+
+/* Individual sliders */
+.slider-container .slider {
+  display: flex;
+  flex-direction: column; /* Arrange slider and label vertically */
+  align-items: center; /* Center the slider and its label */
+  width: 33%; /* Each slider takes one-third of the container */
 }
 
 /* Styling for sliders */
 input[type="range"] {
   -webkit-appearance: none; /* Remove default styling */
   appearance: none;
-  width: 200px; /* Slider width */
+  width: 100%; /* Full width of its container */
   height: 0.1px; /* Thinner slider track height */
   background: black; /* Slider track color */
   border-radius: 5px; /* Rounded track edges */
@@ -55,10 +76,10 @@ input[type="range"]::-ms-thumb {
   cursor: pointer; /* Change cursor to pointer */
 }
 
-/* Optional: Add some spacing between sliders and labels */
-p {
+/* Optional: Styling for labels */
+.slider-container p {
   margin-top: 5px;
-  margin-bottom: 15px;
   font-family: Arial, sans-serif;
   font-size: 14px;
+  text-align: center;
 }
