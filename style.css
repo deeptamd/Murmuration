@@ -21,6 +21,7 @@ html, body {
 /* Ensure paragraphs and other text elements are centered */
 p, h1, h2, h3 {
   text-align: center;
+  gap: 20px
 }
 
 /* Styling for sliders */
