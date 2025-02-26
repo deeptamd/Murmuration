@@ -42,7 +42,7 @@ let controlsDiv = createDiv('').style('display', 'flex')
                               .style('bottom', '10px') // Lower value since padding adds space
                               .style('left', '50%')
                               .style('transform', 'translateX(-50%)')
-                              .style('padding-bottom', '200px'); // Add padding
+                              .style('padding-bottom', '100px'); // Add padding
 
   function createSliderWithLabel(labelText, min, max, start, step) {
     let wrapper = createDiv('').parent(controlsDiv).style('text-align', 'center');
