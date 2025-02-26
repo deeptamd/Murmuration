@@ -25,33 +25,40 @@ function preload() {
 
 function setup() {
   createCanvas(1200, 600);
-  loadWeatherData(); // Fetch initial weather data
-  setInterval(loadWeatherData, 10000); // Update every 30 seconds
+  loadWeatherData();
+  setInterval(loadWeatherData, 10000);
 
   flock = new Flock();
 
-  // Add an initial set of boids into the system (morning = 500 boids)
   for (let i = 0; i < 2000; i++) {
     let b = new Boid(width / 2 + random(-50, 50), height / 2 + random(-50, 50));
     flock.addBoid(b);
   }
 
-  // Daylight slider: 0 (night) to 1 (full daylight)
+  let centerX = width / 2; // Center horizontally
+  let startY = height / 2 - 100; // Start point, vertically centered
+
+  // Daylight slider (group 1)
+  createP("Daylight (0 = Sunrise, 1 = Sunset)")
+    .position(centerX - 100, startY);
   daylightSlider = createSlider(0, 1, 0.5, 0.01);
-  daylightSlider.position(10, height + 10);
-  createP("Daylight (0 = Sunrise, 1 = Sunset)").position(10, height + 30);
+  daylightSlider.position(centerX - 100, startY + 30);
 
-  // Sky condition slider: 0 (rainy) to 1 (clear skies)
+  // Sky Condition slider (group 2)
+  createP("Sky Condition (0 = Rainy Weather, 1 = Clear Weather)")
+    .position(centerX - 100, startY + 80);
   skyConditionSlider = createSlider(0, 1, 0.5, 0.01);
-  skyConditionSlider.position(10, height + 70);
-  createP("Sky Condition (0 = Rainy Weather, 1 = Clear Weather)").position(10, height + 90);
+  skyConditionSlider.position(centerX - 100, startY + 110);
 
-  // Humidity slider: 0 (dry) to 100 (very humid)
+  // Humidity slider (group 3)
+  createP("Humidity (0 = Humid, 100 = Dry)")
+    .position(centerX - 100, startY + 160);
   humiditySlider = createSlider(0, 100, 50, 1);
-  humiditySlider.position(10, height + 130);
-  createP("Humidity (0 = Humid, 100 = Dry)").position(10, height + 150);
+  humiditySlider.position(centerX - 100, startY + 190);
 
-  murmurationSound.loop(); // Start the murmuration sound
+  murmurationSound.loop();
+}
+
 }
 
 function draw() {
