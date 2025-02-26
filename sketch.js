@@ -34,20 +34,25 @@ function setup() {
     flock.addBoid(b);
   }
 
-  let controlsDiv = createDiv('').style('display', 'flex')
-                                  .style('flex-direction', 'column')
-                                  .style('align-items', 'center')
-                                  .style('gap', '10px')
-                                  .style('position', 'absolute')
-                                  .style('bottom', '10px')
-                                  .style('left', '50%')
-                                  .style('transform', 'translateX(-50%)');
+// To this:
+let controlsDiv = createDiv('').style('display', 'flex')
+                              .style('flex-direction', 'row') // Change to row for horizontal layout
+                              .style('justify-content', 'space-between') // Space controls evenly
+                              .style('align-items', 'center')
+                              .style('gap', '20px')
+                              .style('position', 'absolute')
+                              .style('bottom', '10px')
+                              .style('left', '50%')
+                              .style('transform', 'translateX(-50%)')
+                              .style('width', '80%'); // Control overall width
 
   function createSliderWithLabel(labelText, min, max, start, step) {
-    let wrapper = createDiv('').parent(controlsDiv).style('text-align', 'center');
+    let wrapper = createDiv('').parent(controlsDiv)
+                              .style('text-align', 'center')
+                              .style('width', '30%'); // Each control takes similar width
     createP(labelText).parent(wrapper).style('margin', '0');
-    return createSlider(min, max, start, step).parent(wrapper);
-  }
+    return createSlider(min, max, start, step).parent(wrapper).style('width', '100%');
+}
 
   daylightSlider = createSliderWithLabel("Daylight (0 = Sunrise, 1 = Sunset)", 0, 1, 0.5, 0.01);
   skyConditionSlider = createSliderWithLabel("Sky Condition (0 = Rainy, 1 = Clear)", 0, 1, 0.5, 0.01);
