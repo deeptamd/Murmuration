@@ -35,11 +35,11 @@ function setup() {
   }
 
   let controlsDiv = createDiv('').style('display', 'flex')
-                                  .style('justify-content', 'center')
+                                  .style('flex-direction', 'column')
                                   .style('align-items', 'center')
-                                  .style('gap', '20px')
+                                  .style('gap', '10px')
                                   .style('position', 'absolute')
-                                  .style('top', '10px')
+                                  .style('bottom', '10px')
                                   .style('width', '100%');
   
   let daylightLabel = createP("Daylight (0 = Sunrise, 1 = Sunset)").parent(controlsDiv);
