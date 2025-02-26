@@ -1,4 +1,3 @@
-sketch.js:
 let flock;
 let weatherData; // To store the weather data
 let apiURL = "https://api.openweathermap.org/data/2.5/weather?q=Bengaluru&APPID=aacedc9a30cfcbe4d7e237cd5ad4830b";
@@ -25,7 +24,21 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(1200, 600);
+  if (window.self === window.top) {
+    // If the sketch is running in the main window, open it in a new tab
+    let newTab = window.open(window.location.href, "_blank");
+    if (newTab) {
+      newTab.focus(); // Focus the new tab
+    } else {
+      alert("Please allow popups for this site to see the sketch in full screen.");
+    }
+    noCanvas(); // Prevent the sketch from running in the current tab
+    return;
+  }
+  // Setup canvas and other elements for the new tab
+  createCanvas(windowWidth, windowHeight);
+  fullscreen(true); // Enter full-screen mode
+  createP("Click anywhere to make the flock disperse like birds avoiding a predator.");
   loadWeatherData(); // Fetch initial weather data
   setInterval(loadWeatherData, 10000); // Update every 30 seconds
 
@@ -40,20 +53,21 @@ function setup() {
   // Daylight slider: 0 (night) to 1 (full daylight)
   daylightSlider = createSlider(0, 1, 0.5, 0.01);
   daylightSlider.position(10, height + 10);
-  createP("Daylight (0 = Sunrise, 1 = Sunset)").position(10, height + 30);
+  createP("Daylight (0 = Full Daylight, 1 = Night)").position(10, height + 30);
 
   // Sky condition slider: 0 (rainy) to 1 (clear skies)
   skyConditionSlider = createSlider(0, 1, 0.5, 0.01);
   skyConditionSlider.position(10, height + 70);
-  createP("Sky Condition (0 = Rainy Weather, 1 = Clear Weather)").position(10, height + 90);
+  createP("Sky Condition (0 = Rainy, 1 = Clear Skies)").position(10, height + 90);
 
   // Humidity slider: 0 (dry) to 100 (very humid)
   humiditySlider = createSlider(0, 100, 50, 1);
   humiditySlider.position(10, height + 130);
-  createP("Humidity (0 = Humid, 100 = Dry)").position(10, height + 150);
+  createP("Humidity (0 = Dry, 100 = Very Humid)").position(10, height + 150);
 
   murmurationSound.loop(); // Start the murmuration sound
 }
+
 
 function draw() {
   background(255); // Keep the background white at all times
@@ -103,7 +117,7 @@ function mouseReleased() {
 }
 
 function adjustBoidCount(daylightValue, skyConditionValue) {
-  let targetBoidCount = map(daylightValue, 0, 1, 500, 1700); // Fewer boids at night, more during day
+  let targetBoidCount = map(daylightValue, 0, 1, 400, 1200); // Fewer boids at night, more during day
   while (flock.boids.length > targetBoidCount) flock.boids.pop(); // Remove excess
   while (flock.boids.length < targetBoidCount) {
     let b = new Boid(width / 2 + random(-100, 100), height / 2 + random(-100, 100));
@@ -114,7 +128,7 @@ function adjustBoidCount(daylightValue, skyConditionValue) {
 function adjustSoundVolumeAndPitch() {
   let avgSpeed = flock.getAverageSpeed();
   murmurationSound.rate(map(avgSpeed, 2, 7, 0.8, 1.5)); // Adjust pitch based on average speed
-  let density = flock.boids.length / 1200; // Normze density between 0 and 1
+  let density = flock.boids.length / 1200; // Normalize density between 0 and 1
   murmurationSound.setVolume(density);
 }
 
@@ -189,11 +203,11 @@ class Boid {
     this.acceleration = createVector(0, 0);
     this.velocity = createVector(random(-1, 1), random(-1, 1));
     this.position = createVector(x, y);
-    this.r = 1.5;
+    this.r = 1;
     this.maxspeed = 3;
     this.maxforce = 0.3;
     this.separationFactor = 20.0;
-    this.cohesionFactor = 20.0;
+    this.cohesionFactor = 30.0;
   }
 
   run(boids) {
@@ -230,8 +244,8 @@ class Boid {
 
   flock(boids) {
     let sep = this.separate(boids).mult(this.separationFactor || 2.0);
-    let ali = this.align(boids).mult(2);
-    let coh = this.cohesion(boids).mult(this.cohesionFactor || 1);
+    let ali = this.align(boids).mult(1.5);
+    let coh = this.cohesion(boids).mult(this.cohesionFactor || 1.5);
 
     this.applyForce(sep);
     this.applyForce(ali);
@@ -343,86 +357,3 @@ class Boid {
     return createVector(0, 0);
   }
 }
-
-style.css -
-/* General page styling */
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%; /* Ensure body takes full height */
-  display: flex;
-  justify-content: center; /* Horizontally center the content */
-  align-items: center; /* Vertically center the content */
-}
-
-/* Center the canvas on the page */
-canvas {
-  display: block;
-}
-
-/* Styling for sliders */
-input[type="range"] {
-  -webkit-appearance: none; /* Remove default styling */
-  appearance: none;
-  width: 200px; /* Slider width */
-  height: 2px; /* Thinner slider track height */
-  background: black; /* Slider track color */
-  border-radius: 5px; /* Rounded track edges */
-  outline: none; /* Remove focus outline */
-}
-
-/* Slider thumb styling for WebKit browsers (Chrome, Safari, etc.) */
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Remove default styling */
-  appearance: none;
-  width: 15px; /* Thumb width */
-  height: 15px; /* Thumb height */
-  background: black; /* Thumb color */
-  border-radius: 50%; /* Circular thumb */
-  cursor: pointer; /* Change cursor to pointer */
-}
-
-/* Slider thumb styling for Firefox */
-input[type="range"]::-moz-range-thumb {
-  width: 15px; /* Thumb width */
-  height: 15px; /* Thumb height */
-  background: black; /* Thumb color */
-  border: none; /* Remove border */
-  border-radius: 50%; /* Circular thumb */
-  cursor: pointer; /* Change cursor to pointer */
-}
-
-/* Slider thumb styling for Edge and Internet Explorer */
-input[type="range"]::-ms-thumb {
-  width: 15px; /* Thumb width */
-  height: 15px; /* Thumb height */
-  background: black; /* Thumb color */
-  border: none; /* Remove border */
-  border-radius: 50%; /* Circular thumb */
-  cursor: pointer; /* Change cursor to pointer */
-}
-
-/* Optional: Add some spacing between sliders and labels */
-p {
-  margin-top: 5px;
-  margin-bottom: 15px;
-  font-family: Arial, sans-serif;
-  font-size: 14px;
-}
-
-index.html -
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/p5.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/addons/p5.sound.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <meta charset="utf-8" />
-
-  </head>
-  <body>
-    <main>
-    </main>
-    <script src="sketch.js"></script>
-  </body>
-</html>
