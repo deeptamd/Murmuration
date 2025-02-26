@@ -35,23 +35,28 @@ function setup() {
     flock.addBoid(b);
   }
 
-  let centerX = width / 2;
-  let startY = height + 20; 
+  // Create a wrapper for the entire control section
+  let controlWrapper = createDiv('');
+  controlWrapper.style('display', 'flex');
+  controlWrapper.style('justify-content', 'center'); // Center horizontally
+  controlWrapper.style('margin-top', '40px'); // Space between canvas and controls
 
-  // Daylight slider
-  createP("Daylight (0 = Sunrise, 1 = Sunset)").position(centerX - 200, startY);
-  daylightSlider = createSlider(0, 1, 0.5, 0.01);
-  daylightSlider.position(centerX - 200, startY + 30);
+  // Function to create labeled sliders
+  function createSliderWithLabel(label, min, max, defaultValue, step) {
+    let wrapper = createDiv('').parent(controlWrapper);
+    wrapper.style('margin', '0 20px'); // Add horizontal spacing between sliders
 
-  // Sky Condition slider
-  createP("Sky Condition (0 = Rainy Weather, 1 = Clear Weather)").position(centerX - 200, startY + 80);
-  skyConditionSlider = createSlider(0, 1, 0.5, 0.01);
-  skyConditionSlider.position(centerX - 200, startY + 110);
+    let labelElement = createP(label);
+    labelElement.style('font-weight', 'bold');
+    labelElement.style('text-align', 'center'); // Center the label text
+    labelElement.parent(wrapper);
 
-  // Humidity slider
-  createP("Humidity (0 = Humid, 100 = Dry)").position(centerX - 200, startY + 160);
-  humiditySlider = createSlider(0, 100, 50, 1);
-  humiditySlider.position(centerX - 200, startY + 190);
+    return createSlider(min, max, defaultValue, step).parent(wrapper);
+  }
+
+  daylightSlider = createSliderWithLabel('Daylight (0 = Sunrise, 1 = Sunset)', 0, 1, 0.5, 0.01);
+  skyConditionSlider = createSliderWithLabel('Sky Condition (0 = Rainy, 1 = Clear)', 0, 1, 0.5, 0.01);
+  humiditySlider = createSliderWithLabel('Humidity (0 = Humid, 100 = Dry)', 0, 100, 50, 1);
 
   murmurationSound.loop();
 }
