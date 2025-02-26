@@ -37,9 +37,9 @@ function setup() {
   let controlsDiv = createDiv('').style('display', 'flex')
                                   .style('flex-direction', 'row')
                                   .style('align-items', 'center')
-                                  .style('gap', '10px')
+                                  .style('gap', '20px')
                                   .style('position', 'absolute')
-                                  .style('bottom', '10px')
+                                  .style('bottom', '30px')
                                   .style('left', '50%')
                                   .style('transform', 'translateX(-50%)');
 
@@ -49,9 +49,9 @@ function setup() {
     return createSlider(min, max, start, step).parent(wrapper);
   }
 
-  daylightSlider = createSliderWithLabel("Daylight (0 = Sunrise, 1 = Sunset)", 0, 1, 0.5, 0.01);
-  skyConditionSlider = createSliderWithLabel("Sky Condition (0 = Rainy, 1 = Clear)", 0, 1, 0.5, 0.01);
-  humiditySlider = createSliderWithLabel("Humidity (0 = Humid, 100 = Dry)", 0, 100, 50, 1);
+  daylightSlider = createSliderWithLabel("Daylight", 0, 1, 0.5, 0.01);
+  skyConditionSlider = createSliderWithLabel("Sky Condition", 0, 1, 0.5, 0.01);
+  humiditySlider = createSliderWithLabel("Humidity", 0, 100, 50, 1);
 
   murmurationSound.loop();
 }
