@@ -17,7 +17,59 @@
       </main>
       <div class="padman2">
         <script src="sketch.js"></script>
+        <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const controlsContainer = document.createElement("div");
+        controlsContainer.className = "controls";
         
+        const controls = [
+            { id: "daylight", label: "Daylight (0 = Sunrise, 1 = Sunset)", min: 0, max: 1, step: 0.01 },
+            { id: "sky", label: "Sky Condition (0 = Rainy, 1 = Clear)", min: 0, max: 1, step: 0.01 },
+            { id: "humidity", label: "Humidity (0 = Humid, 100 = Dry)", min: 0, max: 100, step: 1 }
+        ];
+        
+        controls.forEach(control => {
+            const group = document.createElement("div");
+            group.className = "control-group";
+            
+            const label = document.createElement("label");
+            label.setAttribute("for", control.id);
+            label.textContent = control.label;
+            
+            const input = document.createElement("input");
+            input.type = "range";
+            input.id = control.id;
+            input.min = control.min;
+            input.max = control.max;
+            input.step = control.step;
+            
+            group.appendChild(label);
+            group.appendChild(document.createElement("br")); // Ensures label is above slider
+            group.appendChild(input);
+            controlsContainer.appendChild(group);
+        });
+        
+        document.body.appendChild(controlsContainer);
+    });
+</script>
+        <style>
+    .controls {
+        position: fixed;
+        bottom: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+    .control-group {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    label {
+        margin-bottom: 5px;
+    }
+</style>
       </div>
     </div>
   </body>
