@@ -36,20 +36,25 @@ function setup() {
     flock.addBoid(b);
   }
 
-  // Daylight slider: 0 (night) to 1 (full daylight)
+  // Arrange controls horizontally with some spacing on top
+  let controlX = 10;
+  let controlY = height + 20;
+
   daylightSlider = createSlider(0, 1, 0.5, 0.01);
-  daylightSlider.position(10, height + 10);
-  createP("Daylight (0 = Sunrise, 1 = Sunset)").position(10, height + 30);
-
-  // Sky condition slider: 0 (rainy) to 1 (clear skies)
+  daylightSlider.position(controlX, controlY);
+  createP("Daylight (0 = Sunrise, 1 = Sunset)").position(controlX, controlY - 20);
+  
+  controlX += 200; // Add space between sliders
+  
   skyConditionSlider = createSlider(0, 1, 0.5, 0.01);
-  skyConditionSlider.position(10, height + 70);
-  createP("Sky Condition (0 = Rainy Weather, 1 = Clear Weather)").position(10, height + 90);
-
-  // Humidity slider: 0 (dry) to 100 (very humid)
+  skyConditionSlider.position(controlX, controlY);
+  createP("Sky Condition (0 = Rainy, 1 = Clear)").position(controlX, controlY - 20);
+  
+  controlX += 200; // Add space between sliders
+  
   humiditySlider = createSlider(0, 100, 50, 1);
-  humiditySlider.position(10, height + 130);
-  createP("Humidity (0 = Humid, 100 = Dry)").position(10, height + 150);
+  humiditySlider.position(controlX, controlY);
+  createP("Humidity (0 = Humid, 100 = Dry)").position(controlX, controlY - 20);
 
   murmurationSound.loop(); // Start the murmuration sound
 }
@@ -83,7 +88,6 @@ function draw() {
     flock.repelMultiple(repelPoints);
   }
 }
-
 function mousePressed() {
   // Only add a repelling point if the mouse is within the canvas bounds
   if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
