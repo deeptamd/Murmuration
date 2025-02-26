@@ -1,109 +1,97 @@
 let flock;
-let weatherData; // To store the weather data
+let weatherData;
 let apiURL = "https://api.openweathermap.org/data/2.5/weather?q=Bengaluru&APPID=aacedc9a30cfcbe4d7e237cd5ad4830b";
 
-let currentTemp = 273; // Initial temperature in Kelvin
-let targetTemp = 273; // Target temperature
-let currentHumidity = 50; // Initial humidity
+let currentTemp = 273;
+let targetTemp = 273;
+let currentHumidity = 50;
 let targetHumidity = 50;
-let daylightValue = 0; // Amount of sunlight
-let weatherCondition = ""; // Current weather condition
+let daylightValue = 0;
+let weatherCondition = "";
 
-let daylightSlider; // Slider for controlling daylight
-let humiditySlider; // Slider for controlling humidity
-let skyConditionSlider; // Slider for controlling sky condition
+let daylightSlider;
+let humiditySlider;
+let skyConditionSlider;
 
-let murmurationSound; // Sound object for murmuration
-let repelSound; // Sound object for repelling effect
+let murmurationSound;
+let repelSound;
 
-let repelPoints = []; // Array to store multiple repelling points
+let repelPoints = [];
 
 function preload() {
-  murmurationSound = loadSound("STARLINGS.mp3"); // Load the murmuration sound
-  repelSound = loadSound("FLIGHT.mp3"); // Load the repel sound
+  murmurationSound = loadSound("STARLINGS.mp3");
+  repelSound = loadSound("FLIGHT.mp3");
 }
 
 function setup() {
   createCanvas(1200, 600);
-  loadWeatherData(); // Fetch initial weather data
-  setInterval(loadWeatherData, 10000); // Update every 30 seconds
+  loadWeatherData();
+  setInterval(loadWeatherData, 10000);
 
   flock = new Flock();
-
-  // Add an initial set of boids into the system (morning = 500 boids)
   for (let i = 0; i < 2000; i++) {
     let b = new Boid(width / 2 + random(-50, 50), height / 2 + random(-50, 50));
     flock.addBoid(b);
   }
 
-  // Arrange controls horizontally with some spacing on top
-  let controlX = 10;
-  let controlY = height + 20;
+  let controlsDiv = createDiv('').style('display', 'flex')
+                                  .style('justify-content', 'center')
+                                  .style('align-items', 'center')
+                                  .style('gap', '20px')
+                                  .style('position', 'absolute')
+                                  .style('top', '10px')
+                                  .style('width', '100%');
+  
+  let daylightLabel = createP("Daylight (0 = Sunrise, 1 = Sunset)").parent(controlsDiv);
+  daylightSlider = createSlider(0, 1, 0.5, 0.01).parent(controlsDiv);
 
-  daylightSlider = createSlider(0, 1, 0.5, 0.01);
-  daylightSlider.position(controlX, controlY);
-  createP("Daylight (0 = Sunrise, 1 = Sunset)").position(controlX, controlY - 20);
-  
-  controlX += 200; // Add space between sliders
-  
-  skyConditionSlider = createSlider(0, 1, 0.5, 0.01);
-  skyConditionSlider.position(controlX, controlY);
-  createP("Sky Condition (0 = Rainy, 1 = Clear)").position(controlX, controlY - 20);
-  
-  controlX += 200; // Add space between sliders
-  
-  humiditySlider = createSlider(0, 100, 50, 1);
-  humiditySlider.position(controlX, controlY);
-  createP("Humidity (0 = Humid, 100 = Dry)").position(controlX, controlY - 20);
+  let skyConditionLabel = createP("Sky Condition (0 = Rainy, 1 = Clear)").parent(controlsDiv);
+  skyConditionSlider = createSlider(0, 1, 0.5, 0.01).parent(controlsDiv);
 
-  murmurationSound.loop(); // Start the murmuration sound
+  let humidityLabel = createP("Humidity (0 = Humid, 100 = Dry)").parent(controlsDiv);
+  humiditySlider = createSlider(0, 100, 50, 1).parent(controlsDiv);
+
+  murmurationSound.loop();
 }
 
 function draw() {
-  background(255); // Keep the background white at all times
-
-  // Update sliders' values
+  background(255);
   daylightValue = daylightSlider.value();
   let skyConditionValue = skyConditionSlider.value();
   currentHumidity = humiditySlider.value();
 
   if (weatherData) {
-    // Smooth transitions for temperature and humidity
     currentTemp = lerp(currentTemp, targetTemp, 0.05);
     currentHumidity = lerp(currentHumidity, targetHumidity, 0.05);
-
-    // Pass weather data to each boid
     for (let boid of flock.boids) {
       boid.updateWeatherEffects(currentTemp, currentHumidity, weatherCondition, daylightValue, skyConditionValue);
     }
   }
 
   flock.run();
-  adjustBoidCount(daylightValue, skyConditionValue); // Adjust number of boids based on time of day and sky condition
+  adjustBoidCount(daylightValue, skyConditionValue);
+  adjustSoundVolumeAndPitch();
 
-  adjustSoundVolumeAndPitch(); // Adjust sound volume and pitch based on flock dynamics
-
-  // Handle repelling points
   if (repelPoints.length > 0) {
     flock.repelMultiple(repelPoints);
   }
 }
+
 function mousePressed() {
-  // Only add a repelling point if the mouse is within the canvas bounds
   if (mouseX > 0 && mouseX < width && mouseY > 0 && mouseY < height) {
-    repelPoints.push(createVector(mouseX, mouseY)); // Add new repelling point
-    repelSound.setVolume(0.1); // Reduce sound volume
-    repelSound.play(0, 1, 0.2, 0, 1.5); // Play the repel sound for 1-2 seconds
+    repelPoints.push(createVector(mouseX, mouseY));
+    repelSound.setVolume(0.1);
+    repelSound.play(0, 1, 0.2, 0, 1.5);
   }
 }
 
 function mouseReleased() {
-  // Fade out the repel sound when the mouse is released
   if (repelSound.isPlaying()) {
-    repelSound.fade(0, 1.5); // Fade out over 1.5 seconds
+    repelSound.fade(0, 1.5);
   }
-  repelPoints = []; // Clear repelling points when mouse is released
+  repelPoints = [];
 }
+
 
 function adjustBoidCount(daylightValue, skyConditionValue) {
   let targetBoidCount = map(daylightValue, 0, 1, 500, 1700); // Fewer boids at night, more during day
