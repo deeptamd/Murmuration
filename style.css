@@ -8,13 +8,19 @@ html, body {
   align-items: center; /* Center horizontally */
   justify-content: flex-start; /* Align to the top */
   font-family: "Courier", monospace; /* Set all text to Courier */
+  text-align: center; /* Ensure all text is centered */
 }
 
 /* Center the text content at the top */
 .header {
   text-align: center;
-  margin-top: 20px; /* Add some spacing from the top */
+  margin-top: 20px; /* Add spacing from the top */
   max-width: 600px; /* Limit width for readability */
+}
+
+/* Ensure paragraphs and other text elements are centered */
+p, h1, h2, h3 {
+  text-align: center;
 }
 
 /* Styling for sliders */
