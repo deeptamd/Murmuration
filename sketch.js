@@ -41,7 +41,8 @@ function setup() {
                                   .style('position', 'absolute')
                                   .style('bottom', '50px')
                                   .style('left', '50%')
-                                  .style('transform', 'translateX(-50%)');
+                                  .style('transform', 'translateX(-50%)')
+                                  .style('padding-bottom', '20px');
 
   function createSliderWithLabel(labelText, min, max, start, step) {
     let wrapper = createDiv('').parent(controlsDiv).style('text-align', 'center');
