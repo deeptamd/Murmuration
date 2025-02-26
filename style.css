@@ -2,63 +2,67 @@
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%; /* Ensure body takes full height */
+  height: 100%;
   display: flex;
-  justify-content: center; /* Horizontally center the content */
-  align-items: center; /* Vertically center the content */
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center horizontally */
+  justify-content: flex-start; /* Align to the top */
+  font-family: "Courier", monospace; /* Set all text to Courier */
 }
 
-/* Center the canvas on the page */
-canvas {
-  display: block;
+/* Center the text content at the top */
+.header {
+  text-align: center;
+  margin-top: 20px; /* Add some spacing from the top */
+  max-width: 600px; /* Limit width for readability */
 }
 
 /* Styling for sliders */
 input[type="range"] {
-  -webkit-appearance: none; /* Remove default styling */
+  -webkit-appearance: none;
   appearance: none;
-  width: 200px; /* Slider width */
-  height: 2px; /* Thinner slider track height */
-  background: black; /* Slider track color */
-  border-radius: 5px; /* Rounded track edges */
-  outline: none; /* Remove focus outline */
+  width: 200px;
+  height: 2px;
+  background: black;
+  border-radius: 5px;
+  outline: none;
 }
 
-/* Slider thumb styling for WebKit browsers (Chrome, Safari, etc.) */
+/* Slider thumb styling for WebKit browsers */
 input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Remove default styling */
+  -webkit-appearance: none;
   appearance: none;
-  width: 15px; /* Thumb width */
-  height: 15px; /* Thumb height */
-  background: black; /* Thumb color */
-  border-radius: 50%; /* Circular thumb */
-  cursor: pointer; /* Change cursor to pointer */
+  width: 15px;
+  height: 15px;
+  background: black;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 /* Slider thumb styling for Firefox */
 input[type="range"]::-moz-range-thumb {
-  width: 15px; /* Thumb width */
-  height: 15px; /* Thumb height */
-  background: black; /* Thumb color */
-  border: none; /* Remove border */
-  border-radius: 50%; /* Circular thumb */
-  cursor: pointer; /* Change cursor to pointer */
+  width: 15px;
+  height: 15px;
+  background: black;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
-/* Slider thumb styling for Edge and Internet Explorer */
+/* Slider thumb styling for Edge and IE */
 input[type="range"]::-ms-thumb {
-  width: 15px; /* Thumb width */
-  height: 15px; /* Thumb height */
-  background: black; /* Thumb color */
-  border: none; /* Remove border */
-  border-radius: 50%; /* Circular thumb */
-  cursor: pointer; /* Change cursor to pointer */
+  width: 15px;
+  height: 15px;
+  background: black;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
-/* Optional: Add some spacing between sliders and labels */
+/* Paragraph styling */
 p {
   margin-top: 5px;
   margin-bottom: 15px;
-  font-family: Arial, sans-serif;
   font-size: 14px;
+  font-family: "Courier", monospace;
 }
