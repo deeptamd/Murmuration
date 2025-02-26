@@ -1,51 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Murmured</title>
-    <style>
-        body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-        }
-        .controls {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 40px;
-        }
-        .control-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        label {
-            margin-bottom: 5px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Murmured</h1>
-    <p>Murmured is an interactive exploration of time and weather, responding to the circadian rhythm. Touch, slide, listen and observe as murmuration patterns shift with the natural rhythm of the day. Reflect on your connection with these feathered sparks of nature.</p>
-    <p>An exploration by Deeptam Das & Priya Rathod, Interaction Design</p>
-    <canvas id="murmurationCanvas"></canvas>
-    
-    <div class="controls">
-        <div class="control-group">
-            <label for="daylight">Daylight (0 = Sunrise, 1 = Sunset)</label>
-            <input type="range" id="daylight" min="0" max="1" step="0.01">
-        </div>
-        <div class="control-group">
-            <label for="sky">Sky Condition (0 = Rainy, 1 = Clear)</label>
-            <input type="range" id="sky" min="0" max="1" step="0.01">
-        </div>
-        <div class="control-group">
-            <label for="humidity">Humidity (0 = Humid, 100 = Dry)</label>
-            <input type="range" id="humidity" min="0" max="100" step="1">
-        </div>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <div class="padman">
+      <header>
+        <h1>Murmured</h1>
+        <p>Murmured is an interactive exploration of time and weather, responding to the circadian rhythm. Touch, slide, listen and observe as murmuration patterns shift with the natural rhythm of the day. Reflect on your connection with these feathered sparks of nature.</p>
+        <p>An exploration by Deeptam Das & Priya Rathod, Interaction Design</p>
+      </header>
+      <main>
+      </main>
+      <div class="padman2">
+        <script src="sketch.js"></script>
+        
+      </div>
     </div>
-</body>
+  </body>
 </html>
