@@ -39,10 +39,10 @@ function setup() {
                                   .style('align-items', 'center')
                                   .style('gap', '10px')
                                   .style('position', 'absolute')
-                                  .style('bottom', '50px')
+                                  .style('bottom', '40px')
                                   .style('left', '50%')
                                   .style('transform', 'translateX(-50%)')
-                                  .style('padding-bottom', '20px');
+                                  .style('padding-bottom', '50px');
 
   function createSliderWithLabel(labelText, min, max, start, step) {
     let wrapper = createDiv('').parent(controlsDiv).style('text-align', 'center');
