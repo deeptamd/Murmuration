@@ -34,15 +34,15 @@ function setup() {
     flock.addBoid(b);
   }
 
-  let controlsDiv = createDiv('').style('display', 'flex')
-                                  .style('flex-direction', 'row')
-                                  .style('align-items', 'center')
-                                  .style('gap', '250px')
-                                  .style('position', 'absolute')
-                                  .style('bottom', '10px')
-                                  .style('left', '50%')
-                                  .style('transform', 'translateX(-50%)')
-                                  .style('padding-bottom', '250px');
+let controlsDiv = createDiv('').style('display', 'flex')
+                              .style('flex-direction', 'row')
+                              .style('align-items', 'center')
+                              .style('gap', '10px')
+                              .style('position', 'absolute')
+                              .style('bottom', '10px') // Lower value since padding adds space
+                              .style('left', '50%')
+                              .style('transform', 'translateX(-50%)')
+                              .style('padding-bottom', '200px'); // Add padding
 
   function createSliderWithLabel(labelText, min, max, start, step) {
     let wrapper = createDiv('').parent(controlsDiv).style('text-align', 'center');
