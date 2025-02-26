@@ -37,9 +37,9 @@ function setup() {
   let controlsDiv = createDiv('').style('display', 'flex')
                                   .style('flex-direction', 'row')
                                   .style('align-items', 'center')
-                                  .style('gap', '20px')
+                                  .style('gap', '10px')
                                   .style('position', 'absolute')
-                                  .style('bottom', '30px')
+                                  .style('bottom', '50px')
                                   .style('left', '50%')
                                   .style('transform', 'translateX(-50%)');
 
