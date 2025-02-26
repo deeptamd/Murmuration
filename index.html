@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,11 +19,11 @@
         }
         .control-group {
             display: flex;
-            flex-direction: column-reverse;
+            flex-direction: column;
             align-items: center;
         }
-        .control-group label {
-            margin-top: 5px;
+        label {
+            margin-bottom: 5px;
         }
     </style>
 </head>
@@ -34,39 +33,19 @@
     <p>An exploration by Deeptam Das & Priya Rathod, Interaction Design</p>
     <canvas id="murmurationCanvas"></canvas>
     
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const controlsContainer = document.createElement("div");
-            controlsContainer.className = "controls";
-            
-            const controls = [
-                { id: "daylight", label: "Daylight (0 = Sunrise, 1 = Sunset)", min: 0, max: 1, step: 0.01 },
-                { id: "sky", label: "Sky Condition (0 = Rainy, 1 = Clear)", min: 0, max: 1, step: 0.01 },
-                { id: "humidity", label: "Humidity (0 = Humid, 100 = Dry)", min: 0, max: 100, step: 1 }
-            ];
-            
-            controls.forEach(control => {
-                const group = document.createElement("div");
-                group.className = "control-group";
-                
-                const label = document.createElement("label");
-                label.setAttribute("for", control.id);
-                label.textContent = control.label;
-                
-                const input = document.createElement("input");
-                input.type = "range";
-                input.id = control.id;
-                input.min = control.min;
-                input.max = control.max;
-                input.step = control.step;
-                
-                group.appendChild(input);
-                group.appendChild(label);
-                controlsContainer.appendChild(group);
-            });
-            
-            document.body.appendChild(controlsContainer);
-        });
-    </script>
+    <div class="controls">
+        <div class="control-group">
+            <label for="daylight">Daylight (0 = Sunrise, 1 = Sunset)</label>
+            <input type="range" id="daylight" min="0" max="1" step="0.01">
+        </div>
+        <div class="control-group">
+            <label for="sky">Sky Condition (0 = Rainy, 1 = Clear)</label>
+            <input type="range" id="sky" min="0" max="1" step="0.01">
+        </div>
+        <div class="control-group">
+            <label for="humidity">Humidity (0 = Humid, 100 = Dry)</label>
+            <input type="range" id="humidity" min="0" max="100" step="1">
+        </div>
+    </div>
 </body>
 </html>
