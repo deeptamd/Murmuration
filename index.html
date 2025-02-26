@@ -1,59 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/p5.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/addons/p5.sound.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <meta charset="utf-8" />
-  </head>
-  <body>
-    <div class="padman">
-      <header>
-        <h1>Murmured</h1>
-        <p>Murmured is an interactive exploration of time and weather, responding to the circadian rhythm. Touch, slide, listen and observe as murmuration patterns shift with the natural rhythm of the day. Reflect on your connection with these feathered sparks of nature.</p>
-        <p>An exploration by Deeptam Das & Priya Rathod, Interaction Design</p>
-      </header>
-      <main>
-      </main>
-      <div class="padman2">
-        <script src="sketch.js"></script>
-        <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                    const controlsContainer = document.createElement("div");
-                    controlsContainer.className = "controls";
-                    
-                    const controls = [
-                        { id: "daylight", label: "Daylight (0 = Sunrise, 1 = Sunset)", min: 0, max: 1, step: 0.01 },
-                        { id: "sky", label: "Sky Condition (0 = Rainy, 1 = Clear)", min: 0, max: 1, step: 0.01 },
-                        { id: "humidity", label: "Humidity (0 = Humid, 100 = Dry)", min: 0, max: 100, step: 1 }
-                    ];
-                    
-                    controls.forEach(control => {
-                        const group = document.createElement("div");
-                        group.className = "control-group";
-                        
-                        const label = document.createElement("label");
-                        label.setAttribute("for", control.id);
-                        label.textContent = control.label;
-                        
-                        const input = document.createElement("input");
-                        input.type = "range";
-                        input.id = control.id;
-                        input.min = control.min;
-                        input.max = control.max;
-                        input.step = control.step;
-                        
-                        group.appendChild(label);
-                        group.appendChild(input);
-                        controlsContainer.appendChild(group);
-                    });
-                    
-                    document.body.appendChild(controlsContainer);
-                });
-        </script>
-      </div>
-    </div>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Murmured</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 40px;
+        }
+        .control-group {
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+        }
+        .control-group label {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Murmured</h1>
+    <p>Murmured is an interactive exploration of time and weather, responding to the circadian rhythm. Touch, slide, listen and observe as murmuration patterns shift with the natural rhythm of the day. Reflect on your connection with these feathered sparks of nature.</p>
+    <p>An exploration by Deeptam Das & Priya Rathod, Interaction Design</p>
+    <canvas id="murmurationCanvas"></canvas>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const controlsContainer = document.createElement("div");
+            controlsContainer.className = "controls";
+            
+            const controls = [
+                { id: "daylight", label: "Daylight (0 = Sunrise, 1 = Sunset)", min: 0, max: 1, step: 0.01 },
+                { id: "sky", label: "Sky Condition (0 = Rainy, 1 = Clear)", min: 0, max: 1, step: 0.01 },
+                { id: "humidity", label: "Humidity (0 = Humid, 100 = Dry)", min: 0, max: 100, step: 1 }
+            ];
+            
+            controls.forEach(control => {
+                const group = document.createElement("div");
+                group.className = "control-group";
+                
+                const label = document.createElement("label");
+                label.setAttribute("for", control.id);
+                label.textContent = control.label;
+                
+                const input = document.createElement("input");
+                input.type = "range";
+                input.id = control.id;
+                input.min = control.min;
+                input.max = control.max;
+                input.step = control.step;
+                
+                group.appendChild(input);
+                group.appendChild(label);
+                controlsContainer.appendChild(group);
+            });
+            
+            document.body.appendChild(controlsContainer);
+        });
+    </script>
+</body>
 </html>
-
-
