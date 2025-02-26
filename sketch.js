@@ -40,16 +40,18 @@ function setup() {
                                   .style('gap', '10px')
                                   .style('position', 'absolute')
                                   .style('bottom', '10px')
-                                  .style('width', '100%');
-  
-  let daylightLabel = createP("Daylight (0 = Sunrise, 1 = Sunset)").parent(controlsDiv);
-  daylightSlider = createSlider(0, 1, 0.5, 0.01).parent(controlsDiv);
+                                  .style('left', '50%')
+                                  .style('transform', 'translateX(-50%)');
 
-  let skyConditionLabel = createP("Sky Condition (0 = Rainy, 1 = Clear)").parent(controlsDiv);
-  skyConditionSlider = createSlider(0, 1, 0.5, 0.01).parent(controlsDiv);
+  function createSliderWithLabel(labelText, min, max, start, step) {
+    let wrapper = createDiv('').parent(controlsDiv).style('text-align', 'center');
+    createP(labelText).parent(wrapper).style('margin', '0');
+    return createSlider(min, max, start, step).parent(wrapper);
+  }
 
-  let humidityLabel = createP("Humidity (0 = Humid, 100 = Dry)").parent(controlsDiv);
-  humiditySlider = createSlider(0, 100, 50, 1).parent(controlsDiv);
+  daylightSlider = createSliderWithLabel("Daylight (0 = Sunrise, 1 = Sunset)", 0, 1, 0.5, 0.01);
+  skyConditionSlider = createSliderWithLabel("Sky Condition (0 = Rainy, 1 = Clear)", 0, 1, 0.5, 0.01);
+  humiditySlider = createSliderWithLabel("Humidity (0 = Humid, 100 = Dry)", 0, 100, 50, 1);
 
   murmurationSound.loop();
 }
